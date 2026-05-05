@@ -1,5 +1,3 @@
-const express = require('express');
-const cors = require('cors');
 const YtDlpWrap = require('yt-dlp-wrap');
 
 const app = express();
