@@ -32,8 +32,7 @@
     .result-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:1.5rem;max-width:600px;margin:1.5rem auto 0;text-align:left;display:none}
     .result-box.show{display:block}
     .vid-info{display:flex;gap:14px;align-items:flex-start;margin-bottom:1rem}
-    .vid-thumb{width:90px;height:60px;background:rgba(99,66,255,0.2);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden}
-    .vid-thumb img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+    .vid-thumb{width:90px;height:60px;background:rgba(99,66,255,0.2);border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:28px}
     .vid-title{font-size:14px;color:#e8e6ff;font-weight:500;margin-bottom:4px;line-height:1.4}
     .vid-meta{font-size:12px;color:#6b7280}
     .dl-options{display:flex;flex-direction:column;gap:8px}
@@ -85,19 +84,19 @@
 
   <div class="badge">No watermark &bull; Free &bull; Fast</div>
   <h1>Download Videos<br>from <span>Anywhere</span></h1>
-  <p class="subtitle">TikTok, Instagram, Facebook, YouTube — paste the link and download without watermark in seconds.</p>
+  <p class="subtitle">TikTok, Instagram, YouTube, Twitter — paste the link and download without watermark in seconds.</p>
 
   <div class="input-wrap">
-    <input type="text" id="urlInput" placeholder="Paste video link here... (e.g. https://tiktok.com/...)" />
+    <input type="text" id="urlInput" placeholder="Paste video link here..." />
     <button class="btn-dl" onclick="handleDownload()">Download</button>
   </div>
 
-  <div class="loader" id="loader"><span class="spinner"></span>Fetching video info...</div>
-  <div class="error-msg" id="errMsg">Please paste a valid video URL.</div>
+  <div class="loader" id="loader"><span class="spinner"></span>Fetching video...</div>
+  <div class="error-msg" id="errMsg"></div>
 
   <div class="result-box" id="resultBox">
     <div class="vid-info">
-      <div class="vid-thumb"><span id="thumbEmoji" style="font-size:28px">🎬</span></div>
+      <div class="vid-thumb">🎬</div>
       <div>
         <div class="vid-title" id="vidTitle"></div>
         <div class="vid-meta" id="vidMeta"></div>
@@ -109,57 +108,54 @@
   <div class="platforms">
     <div class="plat"><span class="dot dot-tt"></span>TikTok</div>
     <div class="plat"><span class="dot dot-ig"></span>Instagram</div>
-    <div class="plat"><span class="dot dot-fb"></span>Facebook</div>
     <div class="plat"><span class="dot dot-yt"></span>YouTube</div>
     <div class="plat"><span class="dot dot-tw"></span>Twitter/X</div>
   </div>
 </div>
 
-<!-- How it works -->
 <div class="how-section">
   <p class="sec-title">How it works</p>
   <div class="steps">
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-title">Copy the Link</div>
-      <div class="step-desc">Open TikTok, Instagram or any platform and copy the video URL.</div>
+      <div class="step-desc">Open any platform and copy the video URL.</div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-title">Paste Here</div>
-      <div class="step-desc">Paste the link in the box above and click Download.</div>
+      <div class="step-desc">Paste the link and click Download.</div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-title">Save Video</div>
-      <div class="step-desc">Choose quality and download your video without watermark!</div>
+      <div class="step-desc">Download without watermark instantly!</div>
     </div>
   </div>
 </div>
 
-<!-- Features -->
 <div class="features">
   <p class="sec-title">Why use SaveIt?</p>
   <div class="feat-grid">
     <div class="feat-card">
       <div class="feat-icon" style="background:rgba(99,66,255,0.15)">🚫</div>
       <div class="feat-title">No Watermark</div>
-      <div class="feat-desc">Download TikTok & Instagram videos completely clean, without any logo or watermark.</div>
+      <div class="feat-desc">Download TikTok & Instagram videos completely clean.</div>
     </div>
     <div class="feat-card">
       <div class="feat-icon" style="background:rgba(168,85,247,0.15)">⚡</div>
       <div class="feat-title">Instant Download</div>
-      <div class="feat-desc">No signup, no waiting. Paste the URL and your video is ready in seconds.</div>
+      <div class="feat-desc">No signup needed. Paste and download in seconds.</div>
     </div>
     <div class="feat-card">
       <div class="feat-icon" style="background:rgba(236,72,153,0.15)">📱</div>
       <div class="feat-title">Works on Mobile</div>
-      <div class="feat-desc">Fully responsive — works perfectly on Android, iPhone, and any browser.</div>
+      <div class="feat-desc">Fully responsive on Android and iPhone.</div>
     </div>
     <div class="feat-card">
       <div class="feat-icon" style="background:rgba(16,185,129,0.15)">🎯</div>
       <div class="feat-title">Multiple Formats</div>
-      <div class="feat-desc">Download as MP4 video or extract audio as MP3. Choose your quality too.</div>
+      <div class="feat-desc">Download as MP4 video or MP3 audio.</div>
     </div>
   </div>
 </div>
@@ -167,95 +163,115 @@
 <footer>Made with ❤️ — <span>SaveIt</span> — Free Video Downloader</footer>
 
 <script>
-  // =========================================
-  // CONFIGURATION: Apna backend URL yahan daalen
-  // =========================================
-  const API_BASE = 'https://saveit-production-8407.up.railway.app'; // Production mein apna domain daalein
+function detectPlatform(url) {
+  if (url.includes('tiktok.com')) return 'TikTok';
+  if (url.includes('instagram.com')) return 'Instagram';
+  if (url.includes('facebook.com') || url.includes('fb.watch')) return 'Facebook';
+  if (url.includes('youtube.com') || url.includes('youtu.be')) return 'YouTube';
+  if (url.includes('twitter.com') || url.includes('x.com')) return 'Twitter/X';
+  return null;
+}
 
-  function detectPlatform(url) {
-    if (url.includes('tiktok.com')) return 'TikTok';
-    if (url.includes('instagram.com')) return 'Instagram';
-    if (url.includes('facebook.com') || url.includes('fb.watch')) return 'Facebook';
-    if (url.includes('youtube.com') || url.includes('youtu.be')) return 'YouTube';
-    if (url.includes('twitter.com') || url.includes('x.com')) return 'Twitter/X';
-    return null;
+function isValidUrl(str) {
+  try { new URL(str); return true; } catch { return false; }
+}
+
+async function handleDownload() {
+  const url = document.getElementById('urlInput').value.trim();
+  const loader = document.getElementById('loader');
+  const err = document.getElementById('errMsg');
+  const box = document.getElementById('resultBox');
+
+  err.classList.remove('show');
+  box.classList.remove('show');
+
+  if (!url || !isValidUrl(url)) {
+    err.textContent = 'Please paste a valid video URL.';
+    err.classList.add('show');
+    return;
   }
 
-  function isValidUrl(str) {
-    try { new URL(str); return true; } catch { return false; }
+  const platform = detectPlatform(url);
+  if (!platform) {
+    err.textContent = 'Platform not supported. Try TikTok, Instagram, YouTube or Twitter/X.';
+    err.classList.add('show');
+    return;
   }
 
-  async function handleDownload() {
-    const url = document.getElementById('urlInput').value.trim();
-    const loader = document.getElementById('loader');
-    const err = document.getElementById('errMsg');
-    const box = document.getElementById('resultBox');
+  loader.classList.add('show');
 
-    err.classList.remove('show');
-    box.classList.remove('show');
+  try {
+    const res = await fetch('https://co.wuk.sh/api/json', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        url: url,
+        vQuality: '720',
+        filenamePattern: 'basic',
+        twitterGif: false,
+        tiktokH265: false
+      })
+    });
 
-    if (!url || !isValidUrl(url)) {
-      err.textContent = 'Please paste a valid video URL.';
+    const data = await res.json();
+    loader.classList.remove('show');
+
+    if (data.status === 'error') {
+      err.textContent = 'Error: ' + (data.text || 'Could not fetch video');
       err.classList.add('show');
       return;
     }
 
-    const platform = detectPlatform(url);
-    if (!platform) {
-      err.textContent = 'Platform not supported. Try TikTok, Instagram, Facebook, YouTube or Twitter/X.';
-      err.classList.add('show');
-      return;
+    document.getElementById('vidTitle').textContent = platform + ' Video — Ready!';
+    document.getElementById('vidMeta').textContent = platform + ' • No watermark';
+
+    const opts = document.getElementById('dlOptions');
+    opts.innerHTML = '';
+
+    if (data.status === 'stream' || data.status === 'redirect' || data.status === 'tunnel') {
+      const row = document.createElement('div');
+      row.className = 'dl-row';
+      row.innerHTML = `
+        <div>
+          <span class="dl-row-label">Video</span>
+          <span class="dl-row-badge">720p MP4</span>
+        </div>
+        <a class="btn-sm" href="${data.url}" target="_blank">Download</a>
+      `;
+      opts.appendChild(row);
     }
 
-    loader.classList.add('show');
-
-    try {
-      // Backend API call
-      const res = await fetch(`${API_BASE}/api/info`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
-      });
-
-      const data = await res.json();
-
-      if (!data.success) {
-        throw new Error(data.error || 'Could not fetch video info');
-      }
-
-      loader.classList.remove('show');
-
-      document.getElementById('vidTitle').textContent = data.title || (platform + ' Video');
-      document.getElementById('vidMeta').textContent = platform + ' • ' + (data.duration || '');
-
-      const opts = document.getElementById('dlOptions');
-      opts.innerHTML = '';
-
-      (data.formats || []).forEach(fmt => {
+    if (data.status === 'picker') {
+      data.picker.forEach((item, i) => {
         const row = document.createElement('div');
         row.className = 'dl-row';
         row.innerHTML = `
           <div>
-            <span class="dl-row-label">${fmt.label}</span>
-            <span class="dl-row-badge">${fmt.quality}</span>
+            <span class="dl-row-label">Video ${i + 1}</span>
+            <span class="dl-row-badge">MP4</span>
           </div>
-          <a class="btn-sm" href="${API_BASE}/api/download?url=${encodeURIComponent(url)}&format=${fmt.format_id}" download>Download</a>
+          <a class="btn-sm" href="${item.url}" target="_blank">Download</a>
         `;
         opts.appendChild(row);
       });
-
-      box.classList.add('show');
-
-    } catch (e) {
-      loader.classList.remove('show');
-      err.textContent = 'Error: ' + e.message + '. Make sure backend is running.';
-      err.classList.add('show');
     }
-  }
 
-  document.getElementById('urlInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') handleDownload();
-  });
+    box.classList.add('show');
+
+  } catch (e) {
+    loader.classList.remove('show');
+    err.textContent = 'Error: ' + e.message;
+    err.classList.add('show');
+  }
+}
+
+document.getElementById('urlInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') handleDownload();
+});
 </script>
 </body>
 </html>
+    
