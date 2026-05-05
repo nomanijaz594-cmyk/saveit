@@ -1,0 +1,22 @@
+{
+  "builders": [
+    {
+      "name": "python",
+      "version": "3.11"
+    },
+    {
+      "name": "node",
+      "version": "18"
+    }
+  ],
+  "install": {
+    "cmds": [
+      "pip install yt-dlp",
+      "apt-get install -y ffmpeg || true",
+      "npm install"
+    ]
+  },
+  "start": {
+    "cmd": "node server.js"
+  }
+}
