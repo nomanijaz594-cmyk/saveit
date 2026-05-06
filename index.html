@@ -103,35 +103,36 @@ function detectPlatform(url) {
 function isValidUrl(str) {
   try { new URL(str); return true; } catch { return false; }
 }
-
 function getDownloadUrl(platform, url) {
   const encoded = encodeURIComponent(url);
   if (platform === 'TikTok') {
     return [
-      { label: 'Video (No Watermark)', quality: 'HD', url: `https://ssstik.io/en?url=${encoded}` },
-      { label: 'Video (No Watermark)', quality: 'SD', url: `https://tikmate.online/?url=${encoded}` }
+      { label: 'Video (No Watermark)', quality: 'HD', url: `https://ssstik.io/#url=${encoded}` },
+      { label: 'Video (No Watermark)', quality: 'SD', url: `https://snaptik.app/?url=${encoded}` }
     ];
   }
   if (platform === 'Instagram') {
     return [
       { label: 'Reel / Video', quality: 'HD', url: `https://snapinsta.app/?url=${encoded}` },
-      { label: 'Reel / Video', quality: 'SD', url: `https://instafinsta.com/?url=${encoded}` }
+      { label: 'Reel / Video', quality: 'SD', url: `https://igdownloader.app/?url=${encoded}` }
     ];
   }
   if (platform === 'YouTube') {
     return [
-      { label: 'Video', quality: 'HD', url: `https://yt1s.com/en/youtube-to-mp4?q=${encoded}` },
-      { label: 'Audio', quality: 'MP3', url: `https://yt1s.com/en/youtube-to-mp3?q=${encoded}` }
+      { label: 'Video', quality: 'HD', url: `https://en.savefrom.net/#url=${encoded}` },
+      { label: 'Audio', quality: 'MP3', url: `https://ytmp3.cc/en13/youtube-to-mp3/?url=${encoded}` }
     ];
   }
   if (platform === 'Facebook') {
     return [
-      { label: 'Video', quality: 'HD', url: `https://fbdown.net/?url=${encoded}` }
+      { label: 'Video', quality: 'HD', url: `https://fdown.net/?URLz=${encoded}` },
+      { label: 'Video', quality: 'SD', url: `https://getfvid.com/?url=${encoded}` }
     ];
   }
   if (platform === 'Twitter/X') {
     return [
-      { label: 'Video', quality: 'HD', url: `https://twittervideodownloader.com/?url=${encoded}` }
+      { label: 'Video', quality: 'HD', url: `https://twittervideodownloader.com/?url=${encoded}` },
+      { label: 'Video', quality: 'SD', url: `https://saver.social/?url=${encoded}` }
     ];
   }
   return [];
