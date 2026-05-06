@@ -113,30 +113,31 @@ function getDownloadUrl(platform, url) {
   }
   if (platform === 'Instagram') {
     return [
-      { label: 'Reel / Video', quality: 'HD', url: `https://snapinsta.app/?url=${encoded}` },
-      { label: 'Reel / Video', quality: 'SD', url: `https://igdownloader.app/?url=${encoded}` }
+      { label: 'Reel / Video', quality: 'HD', url: `https://snapinsta.app/` },
+      { label: 'Reel / Video', quality: 'SD', url: `https://instavideosave.net/` }
     ];
   }
   if (platform === 'YouTube') {
     return [
       { label: 'Video', quality: 'HD', url: `https://en.savefrom.net/#url=${encoded}` },
-      { label: 'Audio', quality: 'MP3', url: `https://ytmp3.cc/en13/youtube-to-mp3/?url=${encoded}` }
+      { label: 'Audio', quality: 'MP3', url: `https://ytmp3.cc/` }
     ];
   }
   if (platform === 'Facebook') {
     return [
-      { label: 'Video HD', quality: 'HD', url: `https://www.getfvid.com/?url=${encoded}` },
-      { label: 'Video SD', quality: 'SD', url: `https://facesaverapp.com/?url=${encoded}` }
+      { label: 'Video HD', quality: 'HD', url: `https://www.getfvid.com/` },
+      { label: 'Video SD', quality: 'SD', url: `https://fsvideo.net/` }
     ];
   }
   if (platform === 'Twitter/X') {
     return [
-      { label: 'Video', quality: 'HD', url: `https://twittervideodownloader.com/?url=${encoded}` },
-      { label: 'Video', quality: 'SD', url: `https://saver.social/?url=${encoded}` }
+      { label: 'Video', quality: 'HD', url: `https://twittervideodownloader.com/` },
+      { label: 'Video', quality: 'SD', url: `https://saver.social/` }
     ];
   }
   return [];
 }
+
   
 
 function handleDownload() {
