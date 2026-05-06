@@ -125,8 +125,8 @@ function getDownloadUrl(platform, url) {
   }
   if (platform === 'Facebook') {
     return [
-      { label: 'Video', quality: 'HD', url: `https://fdown.net/?URLz=${encoded}` },
-      { label: 'Video', quality: 'SD', url: `https://getfvid.com/?url=${encoded}` }
+      { label: 'Video HD', quality: 'HD', url: `https://www.getfvid.com/?url=${encoded}` },
+      { label: 'Video SD', quality: 'SD', url: `https://facesaverapp.com/?url=${encoded}` }
     ];
   }
   if (platform === 'Twitter/X') {
@@ -137,6 +137,7 @@ function getDownloadUrl(platform, url) {
   }
   return [];
 }
+  
 
 function handleDownload() {
   const url = document.getElementById('urlInput').value.trim();
